@@ -4,6 +4,16 @@
 
 ---
 
+## 🎬 EEG Visualizations
+
+### EEG Wave Scroll
+<img src="assets/eeg_scroll.gif" width="700">
+
+### EEG Spectrogram
+<img src="assets/eeg_spectrogram.gif" width="700">
+
+---
+
 ## 🧠 Overview
 
 **Somnus** is a neuroscience-inspired machine learning project that classifies human sleep stages (Wake, N1, N2, N3, REM) using raw EEG data from the [PhysioNet Sleep-EDF dataset](https://physionet.org/content/sleep-edfx/1.0.0/).
