@@ -1,71 +1,88 @@
-💤 Project Somnus — Sleep Stage Classifier (EEG-Based)
+# 💤 Somnus: AI Sleep Stage Classifier using EEG
 
-Somnus is a lightweight EEG-based sleep stage classification project built using open-source PhysioNet Sleep-EDF data.
-It processes raw EEG signals, extracts meaningful frequency-domain features, and classifies sleep stages such as Wake (W), N1, N2, N3, and REM (R) using a machine learning pipeline.
+### *Decoding the architecture of sleep — one brainwave at a time.*
 
-🧠 Overview
+---
 
-Somnus simulates a real-world neuroscience workflow:
+## 🧠 Overview
 
-EEG Preprocessing — Bandpass & adaptive filtering (0.3–40 Hz).
+**Somnus** is a neuroscience-inspired machine learning project that classifies human sleep stages (Wake, N1, N2, N3, REM) using raw EEG data from the [PhysioNet Sleep-EDF dataset](https://physionet.org/content/sleep-edfx/1.0.0/).
 
-Feature Extraction — Computes spectral power in delta, theta, alpha, sigma, and beta bands.
+It extracts neural frequency features (delta, theta, alpha, sigma, beta bands) from EEG epochs and uses a Random Forest classifier to predict stages of sleep — **bridging brainwaves with machine intelligence.**
 
-Classification — Uses a Random Forest model for stage prediction.
+---
 
-Evaluation — Outputs confusion matrix and class distribution visualizations.
+## ⚙️ Tech Stack
+- **Python 3.11**
+- **MNE-Python** — EEG signal processing
+- **Scikit-learn** — Machine learning
+- **NumPy, SciPy, Seaborn, Matplotlib** — Data visualization and analysis
 
-⚙️ Tech Stack
-Layer	Tools
-Programming	Python (Scikit-learn, NumPy, Pandas)
-EEG Toolkit	MNE-Python
-Visualization	Matplotlib, Seaborn
-Dataset	PhysioNet Sleep-EDF (EEG Polysomnography)
-📊 Results (Sample Run)
-Somnus accuracy: 31.43%  |  Balanced Accuracy: 22.54%
+---
 
-Metric	Score
-Precision	0.29
-Recall	0.23
-F1-score	0.23
+## 🧩 Pipeline
 
-(Results vary across runs depending on EEG subject and data length.)
+| Step | Description |
+|------|--------------|
+| 1️⃣ | Downloaded raw EEG + hypnogram data from PhysioNet |
+| 2️⃣ | Applied preprocessing (0.3–40Hz bandpass, adaptive notch filtering) |
+| 3️⃣ | Extracted power spectral density (PSD) across key frequency bands |
+| 4️⃣ | Built a Random Forest classifier on the extracted features |
+| 5️⃣ | Visualized class distributions and confusion matrix |
 
-🧩 Visual Outputs
-Output	Description
-🧠 class_distribution.png	Sleep stage frequency distribution
-📈 confusion_matrix.png	Model performance across stages
+---
 
-Both are saved automatically inside /assets/ after training.
+## 📊 Results
 
-🧰 How to Run Locally
-# Clone repo
-git clone https://github.com/devansh-29-glitch/Somnus.git
-cd Somnus
+### Sleep Stage Distribution
+<p align="center">
+  <img src="assets/class_distribution.png" width="400">
+</p>
 
-# Set up environment
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
+### Confusion Matrix
+<p align="center">
+  <img src="assets/confusion_matrix.png" width="400">
+</p>
 
-# Download dataset
-python somnus_download.py
+> The model achieved an initial accuracy of **31.4%** with balanced accuracy **22.5%** on a small subset (2 subjects).  
+> With more data and a deeper model (e.g. CNN/LSTM), accuracy can exceed 80%.
 
-# Train model
-python somnus_train.py
+---
 
-💡 Future Enhancements
+## 🧩 Example Feature Extraction
+> Power in EEG frequency bands per epoch (30s window):
 
-🧬 Add CNN/LSTM deep learning for improved accuracy
+| Band | Frequency (Hz) | Cognitive Correlate |
+|------|----------------|---------------------|
+| Delta | 0.5–4 | Deep sleep (N3) |
+| Theta | 4–8 | Drowsiness (N1) |
+| Alpha | 8–12 | Relaxed wakefulness |
+| Sigma | 12–16 | Sleep spindle activity (N2) |
+| Beta | 16–30 | REM/active thought |
 
-🕹 Real-time EEG visualization dashboard
+---
 
-💤 Personalized sleep scoring reports
+## 💬 Interpretation
 
-👨‍💻 Author
+Each EEG epoch is transformed into a 5-dimensional feature vector — representing energy in core frequency bands.  
+Somnus learns to associate these spectral fingerprints with corresponding sleep stages, effectively turning raw electrical brain activity into structured neurocognitive patterns.
 
-Devansh Sharma
-Machine Learning × Neuroscience Enthusiast
+---
 
+## 🚀 Next Steps
+- Expand to full Sleep-EDF dataset (20+ subjects)
+- Replace RandomForest with CNN/LSTM hybrid
+- Integrate circadian rhythm tracking and chronotype prediction
+- Develop an interactive dashboard for real-time EEG visualization
 
-💬 “Dreams are just data — Somnus decodes them.”
+---
+
+## 🧠 Author
+**Devansh [Your Last Name]**  
+> Neuroscience & AI Researcher | State-level footballer | SAT 1600 | Stanford Applicant  
+
+Connect on [LinkedIn](https://linkedin.com/in/yourprofile) • [GitHub](https://github.com/devansh-29-glitch)
+
+---
+
+> “If sleep is the brain’s nightly reset, Somnus is the code that watches the reboot.” 🌙
