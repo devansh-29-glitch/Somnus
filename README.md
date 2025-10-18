@@ -78,8 +78,8 @@ Somnus learns to associate these spectral fingerprints with corresponding sleep 
 ---
 
 ## 🧠 Author
-**Devansh [Your Last Name]**  
-> Neuroscience & AI Researcher | State-level footballer | SAT 1600 | Stanford Applicant  
+**Devansh Sharma**  
+> Neuroscience & AI Researcher
 
 Connect on [LinkedIn](https://linkedin.com/in/yourprofile) • [GitHub](https://github.com/devansh-29-glitch)
 
