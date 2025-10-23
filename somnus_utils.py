@@ -1,13 +1,13 @@
-# somnus_utils.py
+
 import numpy as np
 import mne
 
 STAGE_MAP = {
-    'W': 0,   # Wake
-    'N1': 1,  # N1
-    'N2': 2,  # N2
-    'N3': 3,  # N3 (N3+N4 in older scorings)
-    'R': 4    # REM
+    'W': 0,   
+    'N1': 1,  
+    'N2': 2,  
+    'N3': 3,  
+    'R': 4    
 }
 
 INV_STAGE_MAP = {v: k for k, v in STAGE_MAP.items()}
