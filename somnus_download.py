@@ -1,4 +1,3 @@
-# somnus_download.py
 import os
 from pathlib import Path
 import mne
