@@ -1,4 +1,3 @@
-# somnus_features.py
 import os
 from pathlib import Path
 import numpy as np
@@ -10,8 +9,7 @@ from somnus_utils import STAGE_MAP, align_epochs_with_stages, standardize_raw
 ASSETS = Path("assets")
 ASSETS.mkdir(exist_ok=True)
 
-def pick_eeg_channel(raw):
-    # Prefer frontal Fpz-Cz if present; otherwise first EEG channel.
+def pick_eeg_channel(raw):    
     eeg_picks = mne.pick_types(raw.info, eeg=True, eog=False, emg=False)
     if len(eeg_picks) == 0:
         raise RuntimeError("No EEG channels found.")
@@ -31,17 +29,16 @@ def load_psg_hyp(psg_path, hyp_path):
     raw.set_annotations(ann, emit_warning=False)
     raw = standardize_raw(raw)
 
-    # 30-s epoching for sleep
+   
     events, event_ids = mne.events_from_annotations(raw, event_id={
         'Sleep stage W': 1,
         'Sleep stage 1': 2,
         'Sleep stage 2': 3,
         'Sleep stage 3': 4,
-        'Sleep stage 4': 4,  # map stage 4 to N3
+        'Sleep stage 4': 4, 
         'Sleep stage R': 5
     }, verbose=False)
 
-    # Extract stage labels in order of events (1=W, 2=N1, 3=N2, 4=N3, 5=R)
     stage_seq = []
     for e in events:
         code = e[2]
@@ -51,10 +48,9 @@ def load_psg_hyp(psg_path, hyp_path):
         elif code == 4: stage_seq.append(STAGE_MAP['N3'])
         elif code == 5: stage_seq.append(STAGE_MAP['R'])
 
-    # Epoch to 30s windows aligned to annotations
+    
     epochs = mne.make_fixed_length_epochs(raw, duration=30., preload=True, overlap=0, verbose=False)
-    # Align labels to number of epochs
-    # Align stage labels to number of 30s epochs
+    
     n_epochs = len(epochs)
     n_labels = len(stage_seq)
     n = min(n_epochs, n_labels)
@@ -63,24 +59,22 @@ def load_psg_hyp(psg_path, hyp_path):
     epochs = epochs[:n]
     y = np.array(stage_seq[:n], dtype=int)
 
-    # Pick EEG channel and compute PSD bandpowers per epoch
-    ch = pick_eeg_channel(raw)
-    data = epochs.copy().pick(ch).get_data()[:, 0, :]  # (n_epochs, n_samples)
 
+    ch = pick_eeg_channel(raw)
+    data = epochs.copy().pick(ch).get_data()[:, 0, :]  
     sf = raw.info['sfreq']
 
-    # Welch PSD
     feats = []
     for ep in data:
         f, pxx = welch(ep, fs=sf, nperseg=min(4*int(sf), len(ep)))
-        # bands in Hz
+       
         bands = {'delta': (0.5, 4), 'theta': (4, 8), 'alpha': (8, 12), 'sigma': (12, 16), 'beta': (16, 30)}
         row = []
         for (lo, hi) in bands.values():
             idx = (f >= lo) & (f <= hi)
             row.append(np.trapz(pxx[idx], f[idx]))
         feats.append(row)
-    X = np.array(feats)  # shape (n_epochs, 5)
+    X = np.array(feats)  
 
     return X, y
 
