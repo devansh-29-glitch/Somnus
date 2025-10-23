@@ -1,4 +1,3 @@
-# somnus_train.py
 import os
 from pathlib import Path
 import numpy as np
@@ -18,12 +17,12 @@ ASSETS = Path("assets")
 ASSETS.mkdir(exist_ok=True)
 
 def load_subset():
-    # Load same subset we downloaded: subjects [0,1], recording 1
+    
     records = age.fetch_data(subjects=[0, 1], recording=[1])
     X_list, y_list = [], []
     for psg_path, hyp_path in records:
         X, y = load_psg_hyp(psg_path, hyp_path)
-        # Remove epochs labeled outside our mapping (just in case)
+        
         mask = (y >= 0) & (y <= 4)
         X_list.append(X[mask])
         y_list.append(y[mask])
@@ -58,10 +57,8 @@ if __name__ == "__main__":
     X, y = load_subset()
     print("Feature matrix:", X.shape, "Labels:", y.shape)
 
-    # Save class hist
-    plot_class_hist(y, ASSETS / "class_distribution.png")
+        plot_class_hist(y, ASSETS / "class_distribution.png")
 
-    # Train/test
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.25, random_state=42, stratify=y
     )
@@ -79,10 +76,8 @@ if __name__ == "__main__":
     print(f"\nSomnus accuracy: {acc*100:.2f}%  |  Balanced Acc: {bacc*100:.2f}%\n")
     print(classification_report(y_test, y_pred, target_names=[INV_STAGE_MAP[i] for i in sorted(np.unique(y))]))
 
-    # Confusion matrix
+    
     plot_confusion(y_test, y_pred, ASSETS / "confusion_matrix.png")
 
-    # Save model if you want later (joblib)
-    # from joblib import dump
-    # dump(clf, "somnus_model.joblib")
+   
     print("\nSaved figures in assets/: class_distribution.png, confusion_matrix.png")
