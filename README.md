@@ -1,6 +1,6 @@
 # 💤 Somnus: AI Sleep Stage Classifier using EEG
 
-### *Decoding the architecture of sleep — one brainwave at a time.*
+### *Decoding the architecture of sleep - one brainwave at a time.*
 
 ---
 
@@ -18,15 +18,15 @@
 
 **Somnus** is a neuroscience-inspired machine learning project that classifies human sleep stages (Wake, N1, N2, N3, REM) using raw EEG data from the [PhysioNet Sleep-EDF dataset](https://physionet.org/content/sleep-edfx/1.0.0/).
 
-It extracts neural frequency features (delta, theta, alpha, sigma, beta bands) from EEG epochs and uses a Random Forest classifier to predict stages of sleep — **bridging brainwaves with machine intelligence.**
+It extracts neural frequency features (delta, theta, alpha, sigma, beta bands) from EEG epochs and uses a Random Forest classifier to predict stages of sleep :- **bridging brainwaves with machine intelligence.**
 
 ---
 
 ## ⚙️ Tech Stack
 - **Python 3.11**
-- **MNE-Python** — EEG signal processing
-- **Scikit-learn** — Machine learning
-- **NumPy, SciPy, Seaborn, Matplotlib** — Data visualization and analysis
+- **MNE-Python** - EEG signal processing
+- **Scikit-learn** - Machine learning
+- **NumPy, SciPy, Seaborn, Matplotlib** - Data visualization and analysis
 
 ---
 
@@ -74,7 +74,7 @@ It extracts neural frequency features (delta, theta, alpha, sigma, beta bands) f
 
 ## 💬 Interpretation
 
-Each EEG epoch is transformed into a 5-dimensional feature vector — representing energy in core frequency bands.  
+Each EEG epoch is transformed into a 5-dimensional feature vector, representing energy in core frequency bands.  
 Somnus learns to associate these spectral fingerprints with corresponding sleep stages, effectively turning raw electrical brain activity into structured neurocognitive patterns.
 
 ---
