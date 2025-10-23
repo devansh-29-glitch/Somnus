@@ -91,8 +91,6 @@ Somnus learns to associate these spectral fingerprints with corresponding sleep 
 **Devansh Sharma**  
 > Neuroscience & AI Researcher
 
-Connect on [LinkedIn](https://linkedin.com/in/yourprofile) • [GitHub](https://github.com/devansh-29-glitch)
-
 ---
 
 > “If sleep is the brain’s nightly reset, Somnus is the code that watches the reboot.” 🌙
